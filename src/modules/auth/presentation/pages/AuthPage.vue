@@ -135,7 +135,12 @@
 
     <template v-slot="{ user, signOut }">
       <h1>Hello {{ user.username }}!</h1>
-      <button @click="signOut">Sign Out</button>
+      <button
+        @click="signOut"
+        class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600"
+      >
+        Sign Out
+      </button>
     </template>
   </authenticator>
 </template>
