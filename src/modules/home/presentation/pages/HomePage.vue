@@ -1,19 +1,38 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-bold">Home</h1>
-    <p>{{ authStore.authUser?.email }}</p>
-    <button
-      @click="getUserProfile"
-      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600"
-    >
-      Get User Profile
-    </button>
-    <button
-      @click="signOut"
-      class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600"
-    >
-      Sign Out
-    </button>
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
+      <!-- Profile Icon -->
+      <div class="flex justify-center">
+        <div
+          class="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full text-2xl font-bold"
+        >
+          {{ authStore.authUser?.email?.charAt(0).toUpperCase() }}
+        </div>
+      </div>
+
+      <!-- User Info -->
+      <h2 class="text-xl font-semibold mt-4 text-gray-800">
+        Welcome,
+        <span class="text-blue-500">{{ authStore.authUser?.email }}</span>
+      </h2>
+      <p class="text-gray-600 text-sm mt-2">You're logged in successfully.</p>
+
+      <!-- Actions -->
+      <div class="mt-6 space-y-3">
+        <button
+          @click="getUserProfile"
+          class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-200 cursor-pointer"
+        >
+          Get User Profile
+        </button>
+        <button
+          @click="signOut"
+          class="w-full bg-red-500 text-white py-2 rounded-lg font-medium hover:bg-red-600 transition duration-200 cursor-pointer"
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,7 +45,7 @@ const { signOut } = useAuth();
 const authStore = useAuthStore();
 const apiClient = ApiClientFactory.createAuthClient();
 
-// Call to localhost:3001/api/auth/profile to test the auth
+// Fetch user profile
 const getUserProfile = async () => {
   const response = await apiClient.get("/api/auth/profile");
   console.log(response);
