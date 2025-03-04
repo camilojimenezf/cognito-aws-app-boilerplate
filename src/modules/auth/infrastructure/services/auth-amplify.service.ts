@@ -30,7 +30,7 @@ export class AuthAmplifyService implements AuthService {
       }
 
       const email = (session.tokens?.idToken?.payload.email as string) || "";
-      const accessToken = session.tokens?.accessToken.toString() || "";
+      const accessToken = session.tokens?.idToken?.toString() || ""; // we use the idToken as accessToken because the nestJS backend uses the idToken to authenticate the user
       const refreshToken = "";
 
       return {
@@ -61,5 +61,10 @@ export class AuthAmplifyService implements AuthService {
       const message = error instanceof Error ? error.message : "Unknown error";
       throw new RefreshSessionError(message);
     }
+  }
+
+  async getToken(): Promise<string> {
+    const session = await fetchAuthSessionAmplify();
+    return session.tokens?.idToken?.toString() || "";
   }
 }
