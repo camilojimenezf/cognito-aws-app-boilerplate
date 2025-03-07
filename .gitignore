@@ -24,4 +24,10 @@ dist-ssr
 *.sw?
 
 .env
+.env.staging
+.env.development
+.env.production
 
+.deploy.staging.env
+.deploy.development.env
+.deploy.production.env

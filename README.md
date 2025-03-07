@@ -1,5 +1,39 @@
-# Vue 3 + TypeScript + Vite
+# Deployment
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Staging
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+For deployment we use CloudFront and S3.
+You can find the CloudFront distribution ID and S3 bucket in the AWS console.
+Also you need a profile in your AWS credentials file to deploy the frontend with the right permissions.
+
+## 1. Create `.deploy.<environment>.env` file from `.deploy.template.env` and set the variables
+
+```bash
+cp .deploy.template.env .deploy.staging.env
+```
+
+```bash
+cp .deploy.template.env .deploy.development.env
+```
+
+```bash
+cp .deploy.template.env .deploy.production.env
+```
+
+## 2. Deploy command
+
+```bash
+./deploy.sh staging
+```
+
+## Development
+
+```bash
+./deploy.sh development
+```
+
+## Production
+
+```bash
+./deploy.sh production
+```

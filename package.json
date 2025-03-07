@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vue-tsc -b && vite build",
+    "build:staging": "vue-tsc -b && vite build --mode staging",
+    "build:development": "vue-tsc -b && vite build --mode development",
     "preview": "vite preview"
   },
   "dependencies": {
