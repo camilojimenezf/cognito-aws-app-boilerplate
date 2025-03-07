@@ -1,7 +1,5 @@
 # Deployment
 
-## Staging
-
 For deployment we use CloudFront and S3.
 You can find the CloudFront distribution ID and S3 bucket in the AWS console.
 Also you need a profile in your AWS credentials file to deploy the frontend with the right permissions.
