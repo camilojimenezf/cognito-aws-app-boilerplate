@@ -1,6 +1,7 @@
 import {
   signOut as signOutAmplify,
   fetchAuthSession as fetchAuthSessionAmplify,
+  signInWithRedirect as signInWithRedirectAmplify,
 } from "aws-amplify/auth";
 
 import type { IAuthUser } from "../../domain/interfaces/auth-user.interface";
@@ -11,9 +12,19 @@ import {
 } from "../../domain/errors/auth.errors";
 
 export class AuthAmplifyService implements AuthService {
-  signIn(): Promise<void> {
-    // If we use federated authentication, here we could call federatedSignIn
-    throw new Error("SignIn not implemented here, use Amplify UI Components");
+  async signIn(): Promise<void> {
+    try {
+      await signInWithRedirectAmplify({ provider: "Google" });
+    } catch (error) {
+      // check if user is already signed in to get the user info
+      if (
+        error instanceof Error &&
+        error.name === "UserAlreadyAuthenticatedException"
+      ) {
+        await this.refreshSession();
+      }
+      console.error("Google sign-in failed:", error);
+    }
   }
 
   signOut(): Promise<void> {

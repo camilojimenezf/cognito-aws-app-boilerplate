@@ -11,7 +11,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aws-amplify/ui-vue": "^4.2.29",
     "@tailwindcss/vite": "^4.0.9",
     "aws-amplify": "^6.13.2",
     "axios": "^1.8.1",

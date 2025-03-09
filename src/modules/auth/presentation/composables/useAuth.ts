@@ -9,6 +9,10 @@ const authRepository = new AuthRepositoryImpl(new AuthApiDatasource());
 export const useAuth = () => {
   const authStore = useAuthStore();
 
+  const signIn = async () => {
+    await authService.signIn();
+  };
+
   const checkAuth = async (): Promise<boolean> => {
     try {
       const authUser = await authService.getCurrentUser();
@@ -47,5 +51,5 @@ export const useAuth = () => {
     await authRepository.ensureUser();
   };
 
-  return { signOut, checkAuth };
+  return { signIn, signOut, checkAuth };
 };

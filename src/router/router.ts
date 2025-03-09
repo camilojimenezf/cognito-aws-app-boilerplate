@@ -16,7 +16,15 @@ export const router = createRouter({
     {
       path: "/auth",
       component: () =>
-        import("../modules/auth/presentation/pages/AuthPage.vue"),
+        import("../modules/auth/presentation/layouts/AuthLayout.vue"),
+      children: [
+        {
+          path: "/auth",
+          name: "auth",
+          component: () =>
+            import("../modules/auth/presentation/pages/AuthPage.vue"),
+        },
+      ],
     },
   ],
 });

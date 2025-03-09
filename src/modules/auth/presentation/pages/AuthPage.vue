@@ -1,218 +1,54 @@
 <template>
-  <authenticator :form-fields="formFields" :social-providers="['google']">
-    <template v-slot:header>
-      <div style="padding: var(--amplify-space-large); text-align: center">
-        <img
-          class="amplify-image"
-          alt="Amplify logo"
-          src="https://docs.amplify.aws/assets/logo-dark.svg"
-        />
-      </div>
-    </template>
-
-    <template v-slot:sign-in-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Sign in to your account
-      </h3>
-    </template>
-
-    <template v-slot:sign-in-footer>
-      <div style="text-align: center; margin-bottom: 10px">
+  <div class="flex flex-col h-full" test-id="login-page">
+    <div class="px-10 bg-gray-100 basis-3/5 flex flex-col justify-center">
+      <h1 class="font-semibold text-5xl text-blue-800">Welcome,</h1>
+      <p class="text-lg font-semibold text-gray-500">Sign in to continue.</p>
+    </div>
+    <div class="flex justify-center basis-2/5 bg-blue-200">
+      <div class="flex flex-col justify-center">
         <button
-          @click="toForgotPassword"
-          class="amplify-button amplify-field-group__control"
-          data-fullwidth="false"
-          data-size="small"
-          data-variation="link"
-          type="button"
-          style="font-weight: normal"
+          class="flex items-center justify-center p-2 bg-white rounded-md cursor-pointer hover:bg-gray-50"
+          @click="signIn"
         >
-          Reset Password
+          <svg
+            class="mr-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            aria-hidden="true"
+          >
+            <title>Google</title>
+            <g fill="none" fill-rule="evenodd">
+              <path
+                fill="#4285F4"
+                d="M17.64 9.2045c0-.6381-.0573-1.2518-.1636-1.8409H9v3.4814h4.8436c-.2086 1.125-.8427 2.0782-1.7959 2.7164v2.2581h2.9087c1.7018-1.5668 2.6836-3.874 2.6836-6.615z"
+              ></path>
+              <path
+                fill="#34A853"
+                d="M9 18c2.43 0 4.4673-.806 5.9564-2.1805l-2.9087-2.2581c-.8059.54-1.8368.859-3.0477.859-2.344 0-4.3282-1.5831-5.036-3.7104H.9574v2.3318C2.4382 15.9832 5.4818 18 9 18z"
+              ></path>
+              <path
+                fill="#FBBC05"
+                d="M3.964 10.71c-.18-.54-.2822-1.1168-.2822-1.71s.1023-1.17.2823-1.71V4.9582H.9573A8.9965 8.9965 0 0 0 0 9c0 1.4523.3477 2.8268.9573 4.0418L3.964 10.71z"
+              ></path>
+              <path
+                fill="#EA4335"
+                d="M9 3.5795c1.3214 0 2.5077.4541 3.4405 1.346l2.5813-2.5814C13.4632.8918 11.426 0 9 0 5.4818 0 2.4382 2.0168.9573 4.9582L3.964 7.29C4.6718 5.1627 6.6559 3.5795 9 3.5795z"
+              ></path>
+            </g>
+          </svg>
+          <span>Sign in with Google - Cognito</span>
         </button>
       </div>
-    </template>
-
-    <template v-slot:sign-up-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Create a new account
-      </h3>
-    </template>
-
-    <template v-slot:sign-up-footer>
-      <div style="text-align: center; margin-bottom: 10px">
-        <button
-          @click="toSignIn"
-          class="amplify-button amplify-field-group__control"
-          data-fullwidth="false"
-          data-size="small"
-          data-variation="link"
-          type="button"
-          style="font-weight: normal"
-        >
-          Back to Sign In
-        </button>
-      </div>
-    </template>
-
-    <template v-slot:footer>
-      <div style="padding: var(--amplify-space-large); text-align: center">
-        <p class="amplify-text" style="color: var(--amplify-colors-neutral-80)">
-          © All Rights Reserved
-        </p>
-      </div>
-    </template>
-
-    <template v-slot:confirm-sign-up-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Enter Information:
-      </h3>
-    </template>
-
-    <template v-slot:confirm-sign-up-footer>
-      <div>Footer Information</div>
-    </template>
-
-    <template v-slot:setup-totp-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Enter Information:
-      </h3>
-    </template>
-
-    <template v-slot:setup-totp-footer>
-      <div>Footer Information</div>
-    </template>
-
-    <template v-slot:confirm-sign-in-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Enter Information:
-      </h3>
-    </template>
-
-    <template v-slot:confirm-sign-in-footer>
-      <div>Footer Information</div>
-    </template>
-
-    <template v-slot:forgot-password-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Enter Information:
-      </h3>
-    </template>
-
-    <template v-slot:forgot-password-footer>
-      <div>Footer Information</div>
-    </template>
-
-    <template v-slot:confirm-reset-password-header>
-      <h3
-        class="amplify-heading"
-        style="padding: var(--amplify-space-xl) 0 0 var(--amplify-space-xl)"
-      >
-        Enter Information:
-      </h3>
-    </template>
-
-    <template v-slot:confirm-reset-password-footer>
-      <div>Footer Information</div>
-    </template>
-
-    <template v-slot="{ user, signOut }">
-      <h1>Hello {{ user.username }}!</h1>
-      <button
-        @click="signOut"
-        class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600"
-      >
-        Sign Out
-      </button>
-    </template>
-  </authenticator>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-vue";
-import "@aws-amplify/ui-vue/styles.css";
+import { useAuth } from "../composables/useAuth";
 
-const { toSignIn, toForgotPassword } = useAuthenticator();
-
-const formFields = {
-  signIn: {
-    username: {
-      label: "Email",
-      placeholder: "Enter your email",
-    },
-  },
-  signUp: {
-    confirm_password: {
-      label: "Confirm Password:",
-      order: 3,
-    },
-    password: {
-      label: "Password:",
-      placeholder: "Enter your Password:",
-      isRequired: false,
-      order: 2,
-    },
-    username: {
-      label: "Email",
-      placeholder: "Enter your email",
-      order: 1,
-    },
-  },
-  forceNewPassword: {
-    password: {
-      placeholder: "Enter your Password:",
-    },
-  },
-  forgotPassword: {
-    username: {
-      placeholder: "Enter your email:",
-      label: "Email",
-    },
-  },
-  confirmResetPassword: {
-    confirmation_code: {
-      placeholder: "Enter your Confirmation Code:",
-      label: "New Label",
-      isRequired: false,
-    },
-    confirm_password: {
-      placeholder: "Enter your Password Please:",
-    },
-  },
-  setupTotp: {
-    QR: {
-      totpIssuer: "test issuer",
-      totpUsername: "amplify_qr_test_user",
-    },
-    confirmation_code: {
-      label: "New Label",
-      placeholder: "Enter your Confirmation Code:",
-      isRequired: false,
-    },
-  },
-  confirmSignIn: {
-    confirmation_code: {
-      label: "New Label",
-      placeholder: "Enter your Confirmation Code:",
-      isRequired: false,
-    },
-  },
-};
+const { signIn } = useAuth();
 </script>
+
+<style scoped></style>
