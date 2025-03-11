@@ -36,7 +36,15 @@ cp .deploy.template.env .deploy.development.env
 cp .deploy.template.env .deploy.production.env
 ```
 
-## 3. Deploy command
+## 3. Use node version > 20
+
+recommended:
+
+```bash
+nvm use 20.15.0
+```
+
+## 4. Deploy command
 
 ```bash
 ./deploy.sh staging
