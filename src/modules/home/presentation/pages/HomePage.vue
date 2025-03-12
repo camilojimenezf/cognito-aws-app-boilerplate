@@ -20,10 +20,28 @@
       <!-- Actions -->
       <div class="mt-6 space-y-3">
         <button
+          @click="getProfile"
+          class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-200 cursor-pointer"
+        >
+          Get Profile
+        </button>
+        <button
           @click="getUserProfile"
           class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-200 cursor-pointer"
         >
-          Get User Profile
+          Get Profile (User Role)
+        </button>
+        <button
+          @click="getAdminProfile"
+          class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-200 cursor-pointer"
+        >
+          Get Profile (Admin Role)
+        </button>
+        <button
+          @click="refreshSession"
+          class="w-full bg-purple-600 text-white py-2 rounded-lg font-medium hover:bg-purple-700 transition duration-200 cursor-pointer"
+        >
+          Refresh Token
         </button>
         <button
           @click="signOut"
@@ -41,13 +59,28 @@ import { ApiClientFactory } from "../../../../api/api.client";
 import { useAuth } from "../../../auth/presentation/composables/useAuth";
 import { useAuthStore } from "../../../auth/presentation/stores/auth.store";
 
-const { signOut } = useAuth();
+const { signOut, refreshToken } = useAuth();
 const authStore = useAuthStore();
 const apiClient = ApiClientFactory.createAuthClient();
 
 // Fetch user profile
-const getUserProfile = async () => {
+const getProfile = async () => {
   const response = await apiClient.get("/api/auth/profile");
+  console.log(response);
+};
+
+const getUserProfile = async () => {
+  const response = await apiClient.get("/api/auth/profile-user");
+  console.log(response);
+};
+
+const getAdminProfile = async () => {
+  const response = await apiClient.get("/api/auth/profile-admin");
+  console.log(response);
+};
+
+const refreshSession = async () => {
+  const response = await refreshToken();
   console.log(response);
 };
 </script>

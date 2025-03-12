@@ -51,5 +51,9 @@ export const useAuth = () => {
     await authRepository.ensureUser();
   };
 
-  return { signIn, signOut, checkAuth };
+  const refreshToken = async () => {
+    return await authService.refreshSession();
+  };
+
+  return { signIn, signOut, checkAuth, refreshToken };
 };
