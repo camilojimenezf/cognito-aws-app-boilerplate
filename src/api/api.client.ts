@@ -1,8 +1,8 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 import { env } from "../config/env/env";
-import { AuthAmplifyService } from "../modules/auth/infrastructure/services/auth-amplify.service";
+import { createAuthAmplifyAdapter } from "../modules/auth/infrastructure/services/auth-amplify.service";
 
-const authService = new AuthAmplifyService();
+const authService = createAuthAmplifyAdapter();
 
 // API Client Factory
 export class ApiClientFactory {

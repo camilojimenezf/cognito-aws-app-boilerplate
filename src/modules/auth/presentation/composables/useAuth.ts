@@ -1,10 +1,8 @@
 import { useAuthStore } from "../stores/auth.store";
-import { AuthAmplifyService } from "../../infrastructure/services/auth-amplify.service";
-import { AuthRepositoryImpl } from "../../infrastructure/repositories/auth.repository.impl";
-import { AuthApiDatasource } from "../../infrastructure/datasources/auth.api.datasource";
+import { createAuthAmplifyAdapter } from "../../infrastructure/services/auth-amplify.service";
+import { ensureUser as ensureUserAction } from "../../infrastructure/actions/ensure-user.api.action";
 
-const authService = new AuthAmplifyService();
-const authRepository = new AuthRepositoryImpl(new AuthApiDatasource());
+const authService = createAuthAmplifyAdapter();
 
 export const useAuth = () => {
   const authStore = useAuthStore();
@@ -32,7 +30,7 @@ export const useAuth = () => {
       });
 
       if (isFirstLogin) {
-        await ensureUser();
+        await ensureUserAction();
       }
 
       return true;
@@ -45,10 +43,6 @@ export const useAuth = () => {
   const signOut = async () => {
     await authService.signOut();
     authStore.signOut();
-  };
-
-  const ensureUser = async () => {
-    await authRepository.ensureUser();
   };
 
   const refreshToken = async () => {
