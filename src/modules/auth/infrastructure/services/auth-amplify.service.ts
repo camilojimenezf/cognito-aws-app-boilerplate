@@ -3,14 +3,14 @@ import {
   fetchAuthSession as fetchAuthSessionAmplify,
   signInWithRedirect as signInWithRedirectAmplify,
 } from "aws-amplify/auth";
-import type { AuthServiceAdapter } from "../../domain/services/auth.service";
+import type { IAuthService } from "../../domain/services/auth.service";
 import type { IAuthUser } from "../../domain/interfaces/auth-user.interface";
 import {
   GetCurrentUserError,
   RefreshSessionError,
 } from "../../domain/errors/auth.errors";
 
-export function createAuthAmplifyAdapter(): AuthServiceAdapter {
+export function createAuthAmplifyAdapter(): IAuthService {
   const getUserFromSession = (session: any): IAuthUser | null => {
     if (!session.tokens) return null;
 

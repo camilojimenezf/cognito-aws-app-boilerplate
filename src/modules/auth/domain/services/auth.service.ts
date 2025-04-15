@@ -1,6 +1,6 @@
 import type { IAuthUser } from "../interfaces/auth-user.interface";
 
-export interface AuthServiceAdapter {
+export interface IAuthService {
   signIn(): Promise<void>;
   signOut(): Promise<void>;
   getCurrentUser(): Promise<IAuthUser | null>;
